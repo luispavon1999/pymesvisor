@@ -1,0 +1,56 @@
+.modal-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+
+    z-index: 999999; /* CLAVE para Leaflet */
+}
+
+.modal-overlay:target{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box{
+    background: white;
+    padding: 20px 25px;
+    border-radius: 8px;
+    min-width: 300px;
+    max-width: 500px;
+    position: relative;
+}
+
+.modal-close{
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #333;
+}
+
+/* solo para el botón de ejemplo */
+.btn{
+    display: block;
+    background: rgb(240, 55, 55);
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+
+}
+
+.btn:hover{
+    background-color: red;
+}
+

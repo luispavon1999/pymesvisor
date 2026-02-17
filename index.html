@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.awesome-markers/2.0.4/leaflet.awesome-markers.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="modal.css">
+
+  <title>PYMES-APP</title>
+  <link rel="shortcut icon" href="./logoICO.ico">
+
+</head>
+<div id="modal1" class="modal-overlay">
+
+  <div class="modal-box">
+    <a href="#" class="modal-close">×</a>
+    <h2>Division por Zonas</h2>
+    <img src="../index/zona.png" alt="">
+  
+</div>
+
+</div>
+
+
+<body>
+  <div id="loader" class="loader oculto">
+    <div class="spinner"></div>
+    <span id="loader-text"></span>
+  </div>
+
+
+  <nav class="nav">
+    <div class="logo">
+      <img src="./logo.png" alt="claro" class="logo_claro" id="logo_claro_nic" />
+      <h2>VISOR PYMES</h2>
+      <button class="reiniciar" onclick="reiniciarSegmentacion()">
+        Reiniciar
+      </button>
+      <button class="m_ubicacion" onclick="verMiUbicacion()">
+        Ver mi ubicacion
+      </button>
+      Departamentos
+      <select id="selectDepartamento" name="departamento[]">
+        <option value="" selected disabled>Seleccionar</option>
+        <option value="Boaco">Boaco</option>
+        <option value="Carazo">Carazo</option>
+        <option value="Chinandega">Chinandega</option>
+        <option value="Chontales">Chontales</option>
+        <option value="Estelí">Estelí</option>
+        <option value="Granada">Granada</option>
+        <option value="Jinotega">Jinotega</option>
+        <option value="León">León</option>
+        <option value="Madriz">Madriz</option>
+        <option value="Managua">Managua</option>
+        <option value="Masaya">Masaya</option>
+        <option value="Matagalpa">Matagalpa</option>
+        <option value="Nueva Segovia">Nueva Segovia</option>
+        <option value="Río San Juan">Río San Juan</option>
+        <option value="Rivas">Rivas</option>
+        <option value="Costa Caribe Norte">Costa Caribe Norte</option>
+        <option value="Costa Caribe Sur">Costa Caribe Sur</option>
+      </select>
+      Zonas Departamentales
+      <select id="zonaSelect" name="departamento[]">
+        <option value="" selected disabled>Seleccionar</option>
+        <option value="zona_managua">Managua</option>
+        <option value="zona_norte">Norte</option>
+        <option value="zona_occidente">Occidente</option>
+        <option value="zona_suroriente">Sur oriente</option>
+        <option value="zona_centro">Zona Centro</option>
+        <option value="zona_raas">RAAS</option>
+        <option value="zona_raan">RAAN</option>
+      </select>
+    </div>
+    <div class="conteos">
+      <div class="total_n">
+        Total Seleccion : <span id="total_nacional">0</span>
+      </div>
+      <div class="total_porcentual">
+        Cantidad Porcentual : <span id="total_porcentual">0%</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-map">
+    <div class="map" id="mapa"></div>
+
+    <div class="map-option">
+      <div class="segmento">Segmentador</div>
+      <div class="rublos">
+        <div>
+          <input type="checkbox" id="alimentacion_bebidas" />
+          <label for="alimentacion_bebidas">Alimentación y bebidas</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="comercio_tiendas" />
+          <label for="comercio_tiendas">Comercio / Tiendas</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="educacion_formacion" />
+          <label for="educacion_formacion">Educación y formación</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="gobierno_comunidad_servicios_publicos" />
+          <label for="gobierno_comunidad_servicios_publicos">
+            Gobierno, comunidad y servicios públicos
+          </label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="no_clasificado_invalido" />
+          <label for="no_clasificado_invalido">No clasificado / inválido</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="salud_belleza_bienestar" />
+          <label for="salud_belleza_bienestar">Salud, belleza y bienestar</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="servicios_profesionales_financieros" />
+          <label for="servicios_profesionales_financieros">
+            Servicios profesionales y financieros
+          </label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="otros_miscelaneos" />
+          <label for="otros_miscelaneos">Otros / Misceláneos</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="transporte_movilidad" />
+          <label for="transporte_movilidad">Transporte y movilidad</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="comercio_minorista_general_especializado" />
+          <label for="comercio_minorista_general_especializado">
+            Comercio minorista general y especializado
+          </label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="turismo_entretenimiento" />
+          <label for="turismo_entretenimiento">Turismo y entretenimiento</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="servicios_basicos_industria" />
+          <label for="servicios_basicos_industria">Servicios básicos / Industria</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="alojamiento_turismo" />
+          <label for="alojamiento_turismo">Alojamiento y turismo</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="servicios_financieros" />
+          <label for="servicios_financieros">Servicios financieros</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="ocio_cultura_entretenimiento" />
+          <label for="ocio_cultura_entretenimiento">
+            Ocio, cultura y entretenimiento
+          </label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="salud" />
+          <label for="salud">Salud</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="telecomunicaciones_tecnologia" />
+          <label for="telecomunicaciones_tecnologia">
+            Telecomunicaciones / Tecnología
+          </label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="organizaciones_sociales_ong" />
+          <label for="organizaciones_sociales_ong">
+            Organizaciones sociales / ONG
+          </label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="agropecuario_pesca" />
+          <label for="agropecuario_pesca">Agropecuario y pesca</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="servicios_profesionales" />
+          <label for="servicios_profesionales">Servicios profesionales</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="servicios_personales_hogar" />
+          <label for="servicios_personales_hogar">
+            Servicios personales y del hogar
+          </label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="mascotas_animales" />
+          <label for="mascotas_animales">Mascotas y animales</label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="inmobiliario_almacenamiento" />
+          <label for="inmobiliario_almacenamiento">
+            Inmobiliario / Almacenamiento
+          </label>
+        </div>
+
+        <div>
+          <input type="checkbox" id="servicios_para_animales" />
+          <label for="servicios_para_animales">Servicios para animales</label>
+        </div>
+      </div>
+      <hr />
+      <hr />
+      <div class="div_dep">Division Departamental</div>
+      <div class="departamentos">
+        <div>
+          <span>Boaco : </span>
+          <span id="py_boaco">0</span>
+        </div>
+
+        <div>
+          <span>Carazo :</span>
+          <span id="py_carazo">0</span>
+        </div>
+
+        <div>
+          <span>Chinandega : </span>
+          <span id="py_chinandega">0</span>
+        </div>
+
+        <div>
+          <span>Chontales : </span>
+          <span id="py_chontales">0</span>
+        </div>
+
+        <div>
+          <span>Estelí :</span>
+          <span id="py_esteli">0</span>
+        </div>
+
+        <div>
+          <span>Granada : </span>
+          <span id="py_granada">0</span>
+        </div>
+
+        <div>
+          <span>Jinotega : </span>
+          <span id="py_jinotega">0</span>
+        </div>
+
+        <div>
+          <span>León : </span>
+          <span id="py_leon">0</span>
+        </div>
+
+        <div>
+          <span>Madriz : </span>
+          <span id="py_madriz">0</span>
+        </div>
+
+        <div>
+          <span>Managua : </span>
+          <span id="py_managua">0</span>
+        </div>
+
+        <div>
+          <span>Masaya : </span>
+          <span id="py_masaya">0</span>
+        </div>
+
+        <div>
+          <span>Matagalpa :</span>
+          <span id="py_matagalpa">0</span>
+        </div>
+
+        <div>
+          <span>Nueva Segovia :</span>
+          <span id="py_nueva_segovia">0</span>
+        </div>
+
+        <div>
+          <span>Rivas : </span>
+          <span id="py_rivas">0</span>
+        </div>
+
+        <div>
+          <span>Río San Juan : </span>
+          <span id="py_rio_san_juan">0</span>
+        </div>
+
+        <div>
+          <span>RACCN : </span>
+          <span id="py_raccn">0</span>
+        </div>
+
+        <div>
+          <span>RACCS : </span>
+          <span id="py_raccs">0</span>
+        </div>
+      </div>
+      <a href="#modal1" class="btn">Abrir Detalles</a>
+
+    </div>
+  </div>
+  <div id="logoOverlay" class="logo-overlay oculto">
+    <img src="./logo.png" id="logo_central" />
+  </div>
+  </div>
+  </div>
+</body>
+</div>
+
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script src="https://unpkg.com/leaflet-image/leaflet-image.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.awesome-markers/2.0.4/leaflet.awesome-markers.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.25.10/dist/js/uikit-icons.min.js"></script>
+<script src="./script.js"></script>
+<script src="opciones.js"></script>
+<script src="seg_departamento.js"></script>
+
+</html>

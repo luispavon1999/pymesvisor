@@ -1,0 +1,200 @@
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+.logo_claro{
+    width: 50px;
+    height: 50px;
+    margin: 4px;
+}
+
+.conteos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+
+    
+}
+
+.conteos div{
+    
+    width: 290px;
+    margin-right: 50px;
+
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    
+}
+
+.logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav{
+    background-color: #eeecec;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    width: 98%;
+    margin: 1px auto;
+    font-size: 11px;
+
+}
+
+
+.container-map{ 
+    width: 98%;
+    display: flex;
+    margin: 5px auto;
+    height: 200px;
+}
+
+.map{
+    width: 70%;
+    height: 570px;
+}
+
+.map-option{
+    width: 30%;
+    height: 570px;
+    margin-left: 5px;
+
+}
+
+.map-option{
+    background-color: #eeecec;
+
+}
+
+.segmento{
+    background-color: rgb(240, 55, 55);
+    color: white;
+    text-align: center;
+    padding-bottom: 5px;
+
+}
+
+.rublos{
+    overflow-y: auto;
+    max-height: 260px;   /* el alto que tú quieras */
+
+}
+
+.rublos div{
+    margin: 10px;
+    transition: 0.2s all;
+    font-size: 13px;
+}
+label{
+    cursor: pointer;
+}
+
+.rublos div:hover{
+    background-color: red;
+    color: white;
+    transform: scale(1.02);
+    cursor: pointer;
+    
+}
+
+.div_dep{
+    background-color: rgb(240, 55, 55);
+    color: white;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.departamentos{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(4,30px);
+    gap: 7px;
+}
+.departamentos div{
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+.logo button{
+    margin: 10px;
+    padding: 5px;
+    border: none;
+    background-color: rgb(240, 55, 55);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s all;
+}
+
+.logo button:hover{
+    background-color: rgb(240, 55, 55);
+    transform: scale(1.1);
+}
+
+
+
+/* ===== LOGO CENTRADO LOADING ===== */
+.logo-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.logo-overlay.oculto {
+  display: none;
+}
+
+.logo-overlay img {
+  width: 90px;       /* 👈 tamaño controlado */
+  height: 90px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* parpadeo */
+.logo-cargando {
+  animation: parpadeo 1s infinite;
+}
+
+@keyframes parpadeo {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+
+
+select{
+    border: none;
+    margin: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: rgb(240, 55, 55);
+    color: white;
+    border-radius: 5px;
+
+}
+
+option{
+    background-color: white;
+    color: black;
+}
+
